@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>About - TomatoVision Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/animate.css/animate.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: TomatoVision
+  * Template URL: https://bootstrapmade.com/sailor-free-bootstrap-theme/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo me-auto"><a href="/">Tomato<span>Vision</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>  
+          <li><a href="about">About Us</a></li>
+          <li><a href="contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= About ======= -->
+    <section id="about" class="about">
+      <div class="container">
+    
+        <div class="row content">
+          <div class="col-lg-12">
+            <h2>TomatoVision</h2>
+            <h3 class="justify-content-center">A Smart Solution For Tomato Disease Analysis</h3>
+            <h4>Ketahui Tentang Kami...
+              <li> Biasanya, pendeteksian penyakit tomat secara manual memerlukan waktu dan tenaga yang cukup besar. Terkadang pula tidak akurat karena tergantung pada pengamatan manusia. Bahkan, sulit untuk mendeteksi penyakit yang mungkin tidak terlihat oleh mata manusia. Pendeteksian terhadap penyakit pada tanaman tomat biasanya membutuhkan waktu 2–3 jam. Hal ini bergantung pada kondisi yang terjadi di lapangan. Jika hanya mengandalkan hal tersebut, tidak akan efisien untuk memantau penyakit secara rutin pada tanaman tomat yang luas.</li>
+              <li> Solusi yang dibuat ini, akan lebih cepat dan efisien dalam mendeteksi penyakit pada tanaman tomat. Dengan pendeteksian menggunakan teknologi ini dapat membantu petani dalam memantau kondisi tanaman tomat, mengidentifikasi penyakit atau hama sehingga para petani dapat memberikan perawatan yang tepat untuk meningkatkan hasil panen dengan kualitas yang baik.</li>
+            </h4>
+          </div>
+        </div>
+    
+      </div>
+    </section>
+<!-- End About Section -->
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Team</h2>
+          <p>Our Hardworking Team</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{{ url_for('static', filename='assets/img/team/mila4.jpg') }}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Mila Elvina</h4>
+                <span>Front End</span>
+                <p>Universitas Sriwijaya</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href="https://www.instagram.com/elvinamilaa?igshid=MTN0NmlibnkxbDR4aw=="><i class="ri-instagram-fill"></i></a>
+                  <a href=""><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{{ url_for('static', filename='assets/img/team/guswita1.jpg') }}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Guswita Helmi</h4>
+                <span>Machine Learning Engineer</span>
+                <p>Universitas Adzkia</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href="https://www.instagram.com/_witagh?igsh=MzY3Nml1Z21jamZi"><i class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/guswita-helmi-2a20l42w2"><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{{ url_for('static', filename='assets/img/team/dwiky1.jpg') }}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Dwiky Rahmat Fadhila</h4>
+                <span>Back End</span>
+                <p>Universitas Andalas</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href="https://www.instagram.com/dwikyrf/"><i class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/dwikyrf/"><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{{ url_for('static', filename='assets/img/team/rani2.jpg') }}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Rani Dwi Putri</h4>
+                <span>Data Engineer</span>
+                <p>Politeknik Negeri Padang</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{{ url_for('static', filename='assets/img/team/zikri2.jpg') }}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Ahmad Zikri</h4>
+                <span>Technical Writer</span>
+                <p>Universitas Andalas</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Team Section -->
+
+  </main><!-- End #main -->
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+
+</body>
+
+</html>

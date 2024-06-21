@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tomato Disease Classifier</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5">Tomato Disease Classifier</h1>
+      <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="file">Upload an image of a tomato plant:</label>
+          <input type="file" class="form-control-file" id="file" name="file" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+      {% if filename %}
+      <div class="mt-5">
+        <h2>Prediction: {{ label }}</h2>
+        <img src="{{ filename }}" class="img-fluid" alt="Tomato Plant">
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
