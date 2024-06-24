@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hasil Prediksi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hasil Prediksi</h1>
+        <p>Prediksi Kualitas: {{ prediction }}</p>
+        <h2>Detail Nilai Kemiripan</h2>
+        {{ table | safe }}
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Kembali</a>
+    </div>
+</body>
+</html>
