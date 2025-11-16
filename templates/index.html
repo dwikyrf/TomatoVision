@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>TomatoVision - Smart Tomato Disease Detection</title>
+  <meta content="TomatoVision adalah website cerdas untuk mendeteksi penyakit daun tomat menggunakan teknologi computer vision dan machine learning." name="description">
+  <meta content="TomatoVision, Deteksi Penyakit Tomat, Machine Learning, YOLOv5, Flask" name="keywords">
+
+  <style>
+    .modal-dialog {
+      max-width: 800px;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .video-container img {
+      width: 100%;
+      height: auto;
+    }
+
+    #cameraModalLabel,
+    #uploadModalLabel {
+      color: black;
+    }
+
+    /* Hero custom */
+    #hero {
+      margin-top: 80px;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 80px 20px;
+      border-radius: 24px;
+    }
+
+    .hero-title span {
+      color: #ff6347;
+    }
+
+    .hero-subtitle {
+      max-width: 650px;
+    }
+
+    .hero-buttons .btn-main {
+      background: #ff6347;
+      border-radius: 999px;
+      color: #fff;
+      padding: 10px 26px;
+      font-weight: 600;
+      border: none;
+    }
+
+    .hero-buttons .btn-main:hover {
+      background: #ff7b5a;
+      color: #fff;
+    }
+
+    .hero-buttons .btn-ghost {
+      border-radius: 999px;
+      padding: 10px 26px;
+      font-weight: 600;
+      border: 1px solid #fff;
+      color: #fff;
+      background: transparent;
+    }
+
+    .hero-buttons .btn-ghost:hover {
+      background: #fff;
+      color: #333;
+    }
+
+    .fixed-size {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+    }
+
+    .analysis-card {
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .badge-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(220, 53, 69, 0.08);
+      color: #dc3545;
+      font-weight: 600;
+    }
+
+    #portfolio h2 {
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    #portfolio .portfolio-info p {
+      font-size: 13px;
+    }
+  </style>
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/animate.css/animate.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Sailor
+  * Template URL: https://bootstrapmade.com/sailor-free-bootstrap-theme/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo me-auto">
+        <a href="/">Tomato<span>Vision</span></a>
+      </h1>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About Us</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active"
+             style="background-image: url('{{ url_for('static', filename='assets/img/slide/TOMAT6.jpg') }}')">
+          <div class="carousel-container">
+            <div class="container hero-overlay text-center text-lg-start">
+              <h2 class="animate__animated animate__fadeInDown hero-title text-white">
+                Welcome to <span>TOMATO<span>VISION</span></span>
+              </h2>
+              <p class="animate__animated animate__fadeInUp text-white-50 hero-subtitle">
+                TomatoVision adalah website canggih untuk mengidentifikasi penyakit pada tanaman tomat secara cepat,
+                akurat, dan efisien, membantu petani memantau kesehatan tanaman dan menjaga kualitas panen.
+              </p>
+              <div class="hero-buttons d-flex flex-column flex-sm-row gap-3 mt-4 animate__animated animate__fadeInUp">
+                <button type="button" class="btn btn-main"
+                        data-bs-toggle="modal" data-bs-target="#uploadModal">
+                  Upload & Analyze
+                </button>
+                <button type="button" class="btn btn-ghost"
+                        data-bs-toggle="modal" data-bs-target="#cameraModal">
+                  Live Camera Detection
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item"
+             style="background-image: url('{{ url_for('static', filename='assets/img/slide/iniwebslidefoto2.jpg') }}')">
+          <div class="carousel-container">
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item"
+             style="background-image: url('{{ url_for('static', filename='assets/img/slide/webslide2.jpg') }}')">
+          <div class="carousel-container">
+          </div>
+        </div>
+
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </section>
+  <!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= About / Analyzer Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3">
+              <div>
+                <span class="badge-tag mb-2">Tomato Leaf Analyzer</span>
+                <h2>About TomatoVision</h2>
+              </div>
+            </div>
+
+            <p>
+              Penggunaan TomatoVision sangatlah mudah. Pengguna cukup memasukkan gambar daun tomat yang telah disiapkan,
+              kemudian klik tombol analisis. Dalam waktu sepersekian detik, sistem akan menampilkan hasil identifikasi
+              penyakit pada daun tomat. Mudah bukan?
+            </p>
+
+            <h5 class="mt-4 mb-3">Let's Try It...</h5>
+            <p>Masukkan gambar daun tomat yang ingin diidentifikasi atau gunakan kamera secara langsung.</p>
+
+            <div class="card analysis-card mt-3">
+              <div class="card-body">
+                <div class="row gy-4 align-items-center">
+                  <div class="col-md-5 text-center">
+                    <div class="d-flex flex-column gap-3">
+                      <button type="button" class="btn btn-main"
+                              data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        Upload & Analyze
+                      </button>
+                      <button type="button" class="btn btn-outline-secondary"
+                              data-bs-toggle="modal" data-bs-target="#cameraModal">
+                        Open Camera
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div id="result-container" class="text-center text-md-start">
+                      {% if filename %}
+                      <h3 class="mb-3">Result:</h3>
+                      <img id="resultImage" src="{{ filename }}" alt="Detected Image" class="fixed-size mb-2">
+                      <h4 class="mt-2">{{ label }}</h4>
+                      {% else %}
+                      <p class="text-muted mb-0">
+                        Hasil analisis akan tampil di sini setelah Anda mengunggah gambar daun tomat.
+                      </p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- End About/Analyzer Section -->
+
+    <!-- ======= Upload Modal ======= -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="uploadModalLabel">Upload & Analyze</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Form akan POST ke route '/' yang sudah menangani upload & inferensi -->
+            <form id="uploadForm" method="POST" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label for="fileInput" class="form-label">Pilih gambar daun tomat</label>
+                <input type="file" class="form-control" id="fileInput" name="file" accept="image/*" required>
+              </div>
+              <button type="submit" class="btn btn-main">Upload & Analyze</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Upload Modal -->
+
+    <!-- ======= Camera Modal ======= -->
+    <div class="modal fade" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cameraModalLabel">Live Camera Detection</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container text-center">
+              <h6 class="mb-3">Arahkan daun tomat ke kamera untuk mendeteksi penyakit secara real-time</h6>
+              <div class="video-container">
+                <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Camera Modal -->
+
+    <!-- ======= portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="row mb-3">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <div id="portfolio-flters">
+              <h2>Jenis-Jenis Penyakit Daun Tomat</h2>
+              <p class="text-muted">Beberapa contoh penyakit daun tomat dan langkah pengendaliannya.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row portfolio-container">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='assets/img/portfolio/penyakit1.jpg') }}"
+                   class="img-fluid" alt="Bercak Daun Septoria">
+              <div class="portfolio-info">
+                <h4>Bercak Daun Septoria</h4>
+                <p>Pengendalian: benih tahan, bersihkan gulma, musnahkan tanaman terinfeksi (dibakar), rotasi tanaman, dan penyemprotan fungisida.</p>
+                <div class="portfolio-links">
+                  <a href="{{ url_for('static', filename='assets/img/portfolio/penyakit1.jpg') }}"
+                     data-gallery="portfolioGallery"
+                     class="portfolio-lightbox" title="Bercak Daun Septoria"><i class="bx bx-plus"></i></a>
+                  <a href="https://plantix.net/id/library/plant-diseases/100152/septoria-leaf-spot/"
+                     class="portfolio-details-lightbox" data-glightbox="type: external"
+                     title="Detail Penyakit"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='assets/img/portfolio/penyakit2.jpg') }}"
+                   class="img-fluid" alt="Bercak Daun Coklat">
+              <div class="portfolio-info">
+                <h4>Bercak Daun Coklat (Alternaria)</h4>
+                <p>Pengendalian: gunakan bibit tahan, kebersihan lahan, musnahkan tanaman terinfeksi, drainase baik, rotasi tanaman, dan jarak tanam tidak terlalu rapat.</p>
+                <div class="portfolio-links">
+                  <a href="{{ url_for('static', filename='assets/img/portfolio/penyakit2.jpg') }}"
+                     data-gallery="portfolioGallery"
+                     class="portfolio-lightbox" title="Bercak Daun Coklat"><i class="bx bx-plus"></i></a>
+                  <a href="https://plantix.net/id/library/plant-diseases/100203/alternaria-black-spot-and-fruit-rot/"
+                     class="portfolio-details-lightbox" data-glightbox="type: external"
+                     title="Detail Penyakit"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='assets/img/portfolio/penyakit3.jpg') }}"
+                   class="img-fluid" alt="Busuk Daun">
+              <div class="portfolio-info">
+                <h4>Busuk Daun (Phytophthora)</h4>
+                <p>Pengendalian: drainase bagus, jarak tanam tidak rapat, rotasi tanaman, serta memusnahkan tanaman yang terinfeksi.</p>
+                <div class="portfolio-links">
+                  <a href="{{ url_for('static', filename='assets/img/portfolio/penyakit3.jpg') }}"
+                     data-gallery="portfolioGallery"
+                     class="portfolio-lightbox" title="Busuk Daun"><i class="bx bx-plus"></i></a>
+                  <a href="https://plantix.net/id/library/plant-diseases/100046/tomato-late-blight/"
+                     class="portfolio-details-lightbox" data-glightbox="type: external"
+                     title="Detail Penyakit"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='assets/img/portfolio/penyakit6.jpg') }}"
+                   class="img-fluid" alt="Bercak Kerak Bakteri">
+              <div class="portfolio-info">
+                <h4>Bercak Kerak Bakteri</h4>
+                <p>Pengendalian: rotasi tanaman, drainase baik, memusnahkan tanaman sakit, dan aplikasi kalsium untuk meningkatkan ketahanan tanaman.</p>
+                <div class="portfolio-links">
+                  <a href="{{ url_for('static', filename='assets/img/portfolio/penyakit6.jpg') }}"
+                     data-gallery="portfolioGallery"
+                     class="portfolio-lightbox" title="Bercak Kerak Bakteri"><i class="bx bx-plus"></i></a>
+                  <a href="https://plantix.net/id/library/plant-diseases/300050/bacterial-spot-and-speck-of-tomato/"
+                     class="portfolio-details-lightbox" data-glightbox="type: external"
+                     title="Detail Penyakit"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='assets/img/portfolio/penyakit5.jpg') }}"
+                   class="img-fluid" alt="Kapang Daun Tomat">
+              <div class="portfolio-info">
+                <h4>Kapang Daun Tomat</h4>
+                <p>Pengendalian: rotasi tanaman, drainase baik, menjaga kebersihan kebun, dan penggunaan mulsa plastik terutama pada musim hujan.</p>
+                <div class="portfolio-links">
+                  <a href="{{ url_for('static', filename='assets/img/portfolio/penyakit5.jpg') }}"
+                     data-gallery="portfolioGallery"
+                     class="portfolio-lightbox" title="Kapang Daun Tomat"><i class="bx bx-plus"></i></a>
+                  <a href="https://plantix.net/id/library/plant-diseases/100321/early-blight/"
+                     class="portfolio-details-lightbox" data-glightbox="type: external"
+                     title="Detail Penyakit"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- End portfolio Section -->
+
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>

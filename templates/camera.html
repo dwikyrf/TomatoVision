@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Hasil Prediksi - TomatoVision</title>
+
+  <!-- Favicons (opsional, kalau mau konsisten) -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/animate.css/animate.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+
+    #result-section {
+      padding-top: 120px;
+      padding-bottom: 40px;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(220, 53, 69, 0.08);
+      color: #dc3545;
+      font-weight: 600;
+    }
+
+    .result-card {
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .prediction-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background: rgba(25, 135, 84, 0.08);
+      color: #198754;
+      font-weight: 600;
+    }
+
+    .table-container {
+      max-height: 360px;
+      overflow-y: auto;
+      border-radius: 12px;
+      border: 1px solid #e9ecef;
+      background: #fff;
+      padding: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header (sama seperti halaman lain) ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo me-auto">
+        <a href="{{ url_for('index') }}">Tomato<span>Vision</span></a>
+      </h1>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About Us</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <section id="result-section">
+      <div class="container">
+
+        <div class="row justify-content-center mb-4">
+          <div class="col-lg-8 text-center">
+            <span class="badge-tag mb-2">Prediction Result</span>
+            <h2>Hasil Prediksi Daun Tomat</h2>
+            <p class="text-muted">
+              Berikut adalah hasil prediksi kualitas/kelas daun tomat berdasarkan citra yang Anda unggah.
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card result-card">
+              <div class="card-body">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3">
+                  <div>
+                    <h5 class="card-title mb-1">Prediksi Utama</h5>
+                    <p class="mb-0 text-muted small">
+                      Model mengidentifikasi kelas atau kualitas daun tomat sebagai berikut:
+                    </p>
+                  </div>
+                  <div class="mt-3 mt-md-0">
+                    <div class="prediction-pill">
+                      <i class="bi bi-activity"></i>
+                      <span>{{ prediction }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <h6 class="mb-2">Detail Nilai Kemiripan</h6>
+                <p class="text-muted small mb-2">
+                  Tabel berikut menampilkan nilai kemiripan (similarity / score) antara citra input dan setiap kelas/cluster
+                  yang digunakan dalam perhitungan model.
+                </p>
+
+                <div class="table-container">
+                  {{ table | safe }}
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between flex-wrap gap-2">
+                  <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Kembali ke Beranda
+                  </a>
+                  <a href="{{ url_for('index') }}#about" class="btn btn-primary">
+                    Analisis Ulang Gambar Lain
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>

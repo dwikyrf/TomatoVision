@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>About - TomatoVision</title>
+  <meta content="TomatoVision - Smart Solution for Tomato Disease Analysis" name="description">
+  <meta content="Tomato, Vision, Disease Detection, Machine Learning, Agriculture" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/animate.css/animate.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
+  <style>
+  /* Floating animation */
+  @keyframes floatHero {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .hero-img-dynamic {
+    border-radius: 28px;      /* Sudut membulat */
+    overflow: hidden; 
+    position: relative;
+    animation: floatHero 4s ease-in-out infinite;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0px 14px 16px rgba(0, 0, 0, 0.15));
+  }
+
+  /* Hover parallax */
+  .hero-img-dynamic:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0px 25px 30px rgba(255, 99, 71, 0.35));
+  }
+
+  /* Animated glowing circle behind */
+  .hero-glow {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(255,77,77,0.35) 0%, rgba(255,0,0,0.0) 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(30px);
+    z-index: -1;
+    animation: glowPulse 5s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.18); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  }
+    /* Tambahan kecil biar makin manis tanpa ubah CSS global terlalu banyak */
+    .about-hero {
+      padding-top: 120px;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(220, 53, 69, 0.08);
+      color: #dc3545;
+      font-weight: 600;
+    }
+
+    .about-highlight {
+      background: linear-gradient(135deg, #ff6347 0%, #ff9966 50%, #ffcc66 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .feature-card {
+      border-radius: 16px;
+      border: none;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      background: #ffffff;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 99, 71, 0.1);
+      font-size: 24px;
+      color: #ff6347;
+      margin-bottom: 12px;
+    }
+
+    .member {
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+      transition: all .3s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
+    }
+
+    .member .pic img {
+      border-radius: 16px;
+      object-fit: cover;
+      height: 140px;
+      width: 140px;
+    }
+
+    .role-badge {
+      font-size: 12px;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(13, 110, 253, 0.07);
+      color: #0d6efd;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .role-badge i {
+      font-size: 14px;
+    }
+
+    .section-bg-soft {
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    }
+
+    .about-list li {
+      margin-bottom: .35rem;
+    }
+
+    @media (max-width: 991.98px) {
+      .about-hero {
+        padding-top: 100px;
+        text-align: center;
+      }
+
+      .member {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .member .pic {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo me-auto"><a href="/">Tomato<span>Vision</span></a></h1>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a class="active" href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= About Hero Section ======= -->
+    <section id="about" class="about about-hero">
+      <div class="container">
+
+        <div class="row gy-4 align-items-center">
+          <div class="col-lg-7">
+            <span class="badge-tag mb-3 animate__animated animate__fadeInDown">About TomatoVision</span>
+            <h2 class="mb-3 fw-bold">
+              <span class="about-highlight">TomatoVision</span><br>
+              A Smart Solution for Tomato Disease Analysis
+            </h2>
+            <p class="lead text-muted mb-3">
+              Kami menggabungkan <strong>computer vision</strong> dan <strong>machine learning</strong> untuk membantu
+              petani menganalisis penyakit pada tanaman tomat secara lebih cepat, efisien, dan akurat.
+            </p>
+            <p class="mb-4">
+              Tidak hanya mempermudah proses identifikasi penyakit, TomatoVision juga dirancang sebagai sistem decision
+              support yang dapat membantu petani mengambil tindakan yang tepat waktu untuk menjaga kualitas dan
+              produktivitas panen.
+            </p>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center">
+                  <i class="ri-time-line me-2 text-danger" style="font-size: 22px;"></i>
+                  <div>
+                    <strong>Lebih Cepat</strong>
+                    <div class="small text-muted">Analisis otomatis dalam hitungan detik.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center">
+                  <i class="ri-line-chart-line me-2 text-success" style="font-size: 22px;"></i>
+                  <div>
+                    <strong>Lebih Akurat</strong>
+                    <div class="small text-muted">Model dilatih pada berbagai citra penyakit tomat.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-5 position-relative">
+            <div class="text-center position-relative">
+              
+              <!-- Glowing background -->
+              <div class="hero-glow"></div>
+
+              <!-- Hero Illustration -->
+              <img src="{{ url_for('static', filename='assets/img/hero.png') }}"
+                  onerror="this.style.display='none'"
+                  alt="TomatoVision Illustration"
+                  class="img-fluid animate__animated animate__fadeInUp hero-img-dynamic">
+
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="my-5">
+
+        <div class="row content">
+          <div class="col-lg-12">
+            <h4 class="fw-semibold mb-3">Mengapa TomatoVision Dibutuhkan?</h4>
+            <ul class="about-list">
+              <li>
+                Pendeteksian penyakit tomat secara manual
+                <strong>memerlukan waktu dan tenaga yang besar</strong>, dan kualitasnya sangat bergantung pada
+                pengalaman pengamat. Pada lahan yang luas, hal ini menjadi tidak efisien.
+              </li>
+              <li>
+                Pendeteksian manual biasanya membutuhkan waktu
+                <strong>2–3 jam</strong> untuk memeriksa satu area tertentu. Sulit untuk melakukan pemantauan rutin
+                jika hanya mengandalkan cara ini.
+              </li>
+              <li>
+                TomatoVision menawarkan solusi yang
+                <strong>lebih cepat, efisien, dan konsisten</strong> dalam mendeteksi penyakit pada tanaman tomat
+                melalui citra daun secara otomatis.
+              </li>
+              <li>
+                Dengan teknologi ini, petani dapat
+                <strong>memantau kondisi tanaman secara berkala</strong>, mengidentifikasi penyakit atau hama lebih dini,
+                dan memberikan perawatan yang tepat demi menghasilkan panen yang <strong>lebih optimal dan berkualitas</strong>.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- End About Section -->
+
+    <!-- ======= Why TomatoVision Section ======= -->
+    <section class="section-bg-soft py-5">
+      <div class="container">
+        <div class="section-title text-center">
+          <h2>Why TomatoVision?</h2>
+          <p class="text-muted">Keunggulan utama yang kami tawarkan untuk petani dan pelaku agrikultur.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card h-100">
+              <div class="card-body">
+                <div class="feature-icon">
+                  <i class="ri-flashlight-line"></i>
+                </div>
+                <h5 class="card-title">Deteksi Cepat & Real-Time</h5>
+                <p class="card-text small text-muted">
+                  Menggunakan kamera atau citra yang diunggah, sistem dapat mendeteksi jenis penyakit tomat secara
+                  otomatis dalam hitungan detik, cocok untuk inspeksi lapangan yang sering dan rutin.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card h-100">
+              <div class="card-body">
+                <div class="feature-icon">
+                  <i class="ri-brain-line"></i>
+                </div>
+                <h5 class="card-title">Berbasis Machine Learning</h5>
+                <p class="card-text small text-muted">
+                  Model TomatoVision dilatih menggunakan data citra daun tomat dengan berbagai kondisi penyakit, sehingga
+                  mampu mengenali pola dan gejala yang tidak selalu tampak jelas oleh mata manusia.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mx-md-auto">
+            <div class="card feature-card h-100">
+              <div class="card-body">
+                <div class="feature-icon">
+                  <i class="ri-seedling-line"></i>
+                </div>
+                <h5 class="card-title">Mendukung Keberlanjutan</h5>
+                <p class="card-text small text-muted">
+                  Dengan diagnosis yang lebih dini dan tepat, penggunaan pestisida dapat lebih terkontrol, membantu
+                  meningkatkan kualitas panen sekaligus mendukung praktik pertanian yang lebih berkelanjutan.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- End Why TomatoVision Section -->
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Team</h2>
+          <p>Meet Our Hardworking Team</p>
+        </div>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic me-3">
+                <img src="{{ url_for('static', filename='assets/img/team/mila4.jpg') }}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4 class="mb-1">Mila Elvina</h4>
+                <span class="role-badge mb-1">
+                  <i class="ri-layout-4-line"></i> Front End
+                </span>
+                <p class="small text-muted mb-2">Universitas Sriwijaya</p>
+                <p class="small">
+                  Bertanggung jawab pada tampilan antarmuka dan pengalaman pengguna, memastikan TomatoVision mudah
+                  digunakan dan nyaman diakses petani maupun stakeholder lainnya.
+                </p>
+                <div class="social mt-2">
+                  <a href="#"><i class="ri-twitter-fill"></i></a>
+                  <a href="#"><i class="ri-facebook-fill"></i></a>
+                  <a href="https://www.instagram.com/elvinamilaa?igshid=MTN0NmlibnkxbDR4aw=="><i
+                      class="ri-instagram-fill"></i></a>
+                  <a href="#"><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic me-3">
+                <img src="{{ url_for('static', filename='assets/img/team/guswita1.jpg') }}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4 class="mb-1">Guswita Helmi</h4>
+                <span class="role-badge mb-1">
+                  <i class="ri-cpu-line"></i> Machine Learning Engineer
+                </span>
+                <p class="small text-muted mb-2">Universitas Adzkia</p>
+                <p class="small">
+                  Mengembangkan dan mengoptimasi model deteksi penyakit tomat berbasis YOLOv5 sehingga sistem mampu
+                  memberikan prediksi yang cepat dan akurat.
+                </p>
+                <div class="social mt-2">
+                  <a href="#"><i class="ri-twitter-fill"></i></a>
+                  <a href="#"><i class="ri-facebook-fill"></i></a>
+                  <a href="https://www.instagram.com/_witagh?igsh=MzY3Nml1Z21jamZi"><i
+                      class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/guswita-helmi-2a20l42w2"><i
+                      class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic me-3">
+                <img src="{{ url_for('static', filename='assets/img/team/dwiky1.jpg') }}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4 class="mb-1">Dwiky Rahmat Fadhila</h4>
+                <span class="role-badge mb-1">
+                  <i class="ri-server-line"></i> Back End
+                </span>
+                <p class="small text-muted mb-2">Universitas Andalas</p>
+                <p class="small">
+                  Membangun arsitektur back-end, integrasi Flask dengan model YOLOv5, serta pengelolaan API dan alur
+                  data sehingga sistem berjalan stabil dan scalable.
+                </p>
+                <div class="social mt-2">
+                  <a href="#"><i class="ri-twitter-fill"></i></a>
+                  <a href="#"><i class="ri-facebook-fill"></i></a>
+                  <a href="https://www.instagram.com/dwikyrf/"><i class="ri-instagram-fill"></i></a>
+                  <a href="https://www.linkedin.com/in/dwikyrf/"><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic me-3">
+                <img src="{{ url_for('static', filename='assets/img/team/rani2.jpg') }}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4 class="mb-1">Rani Dwi Putri</h4>
+                <span class="role-badge mb-1">
+                  <i class="ri-database-2-line"></i> Data Engineer
+                </span>
+                <p class="small text-muted mb-2">Politeknik Negeri Padang</p>
+                <p class="small">
+                  Mengelola pipeline data, penyimpanan, dan pengolahan dataset citra sehingga data siap digunakan dalam
+                  proses pelatihan dan evaluasi model.
+                </p>
+                <div class="social mt-2">
+                  <a href="#"><i class="ri-twitter-fill"></i></a>
+                  <a href="#"><i class="ri-facebook-fill"></i></a>
+                  <a href="#"><i class="ri-instagram-fill"></i></a>
+                  <a href="#"><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic me-3">
+                <img src="{{ url_for('static', filename='assets/img/team/zikri2.jpg') }}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4 class="mb-1">Ahmad Zikri</h4>
+                <span class="role-badge mb-1">
+                  <i class="ri-quill-pen-line"></i> Technical Writer
+                </span>
+                <p class="small text-muted mb-2">Universitas Andalas</p>
+                <p class="small">
+                  Menyusun dokumentasi teknis, panduan penggunaan, serta materi komunikasi sehingga TomatoVision mudah
+                  dipahami oleh pengguna teknis maupun non-teknis.
+                </p>
+                <div class="social mt-2">
+                  <a href="#"><i class="ri-twitter-fill"></i></a>
+                  <a href="#"><i class="ri-facebook-fill"></i></a>
+                  <a href="#"><i class="ri-instagram-fill"></i></a>
+                  <a href="#"><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- End Team Section -->
+
+  </main><!-- End #main -->
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>

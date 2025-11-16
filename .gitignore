@@ -1,0 +1,25 @@
+myenv
+path
+yolov5
+# Virtual env
+myenv/
+venv/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Uploads & results
+static/uploads/
+uploads/
+results*/
+
+# Big archives
+*.zip
+*.rar
+*.7z
+
+# VSCode / IDE
+.vscode/
+.idea/
