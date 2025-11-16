@@ -84,11 +84,22 @@ def index():
             result_image_path = next((f for f in glob.glob(os.path.join(actual_results_dir, '*')) if f.endswith(('.jpg', '.jpeg', '.png'))), None)
 
             if result_image_path and os.path.exists(result_image_path):
-                label = results.pandas().xyxy[0]['name'].iloc[0] if not results.pandas().xyxy[0].empty else 'No objects detected'
-                result_image_url = url_for('uploaded_file', filename=os.path.relpath(result_image_path, start=app.config['UPLOAD_FOLDER']).replace("\\", "/"))
-                return render_template('index.html', filename=result_image_url, label=label)
+                # Ambil deteksi dari YOLOv5 tanpa pandas
+                detections = results.xyxy[0]  # tensor [N, 6] -> [x1, y1, x2, y2, conf, cls]
+
+                if len(detections) > 0:
+                    # Ambil kelas dari deteksi pertama
+                    cls_id = int(detections[0, -1].item())  # kolom terakhir = class id
+                    label = results.names[cls_id]           # mapping id -> nama class (dari YOLO)
+                else:
+                    label = 'No objects detected'
+
+                result_image_url = url_for('static', filename=os.path.relpath(result_image_path, 'static'))
             else:
-                return 'Error in processing the image.'
+                label = 'No objects detected'
+                result_image_url = None
+
+            
 
     return render_template('index.html')
     
